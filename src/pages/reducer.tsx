@@ -10,6 +10,7 @@ import {
 import { isValidAreaFormInput, isValidFoodFormInput } from "../helper/util";
 import { data } from "../helper/data";
 import { Card } from "../component/card";
+import { Link } from "react-router-dom";
 
 interface PassedProps {}
 
@@ -70,8 +71,16 @@ const Component: React.FC<Props> = (props) => {
                 ? true
                 : d.food === state.selectedFood)
           )
-          .map((d) => (
-            <Card data={d}></Card>
+          .map((d, i) => (
+            <Link
+              to={{
+                pathname: `/reducer-cards/${i}`,
+                state: { data: d },
+              }}
+              key={i}
+            >
+              <Card data={d}></Card>
+            </Link>
           ))}
       </div>
     </div>
