@@ -14,8 +14,8 @@ export type StoreType = {
 };
 
 export const initialState: StoreType = {
-  selectedArea: "東京",
-  selectedFood: "カレー",
+  selectedArea: "ALL",
+  selectedFood: "ALL",
 };
 
 const selectAreaAction = (area: AreaFormValidType) => {

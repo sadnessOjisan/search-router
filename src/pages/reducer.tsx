@@ -8,6 +8,7 @@ import {
 } from "../reducer/searchReducer";
 
 import { isValidAreaFormInput, isValidFoodFormInput } from "../helper/util";
+import { data } from "../helper/data";
 
 const Component = () => {
   const [state, dispatch] = React.useReducer(searchReducer, initialState);
@@ -50,6 +51,24 @@ const Component = () => {
           <option value="ラーメン">ラーメン</option>
         </select>
       </form>
+      <div>
+        {data
+          .filter(
+            (d) =>
+              (state.selectedArea === "ALL"
+                ? true
+                : d.area === state.selectedArea) &&
+              (state.selectedFood === "ALL"
+                ? true
+                : d.food === state.selectedFood)
+          )
+          .map((d) => (
+            <div>
+              {d.area}
+              {d.food}
+            </div>
+          ))}
+      </div>
       {JSON.stringify(state)}
     </div>
   );
