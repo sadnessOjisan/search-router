@@ -7,24 +7,46 @@ import {
   actionCreators,
 } from "../reducer/searchReducer";
 
+import { isArea, isFood } from "../helper/util";
+
 const Component = () => {
-  const [reducer, dispatch] = React.useReducer(searchReducer, initialState);
+  const [state, dispatch] = React.useReducer(searchReducer, initialState);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <label>area</label>
         <select
+          value={state.selectedArea}
           onChange={(e) => {
-            dispatch(actionCreators.selectAreaAction(e.target.value));
+            const input = e.target.value;
+            // TODO: error catch するコンポーネント欲しいな
+            if (!isArea(input)) throw new Error("unexpected value");
+            dispatch(actionCreators.selectAreaAction(input));
           }}
         >
-          <option value="f">hoge</option>
-          <option value="3">hogea</option>
+          <option value="東京">東京</option>
+          <option value="千葉">千葉</option>
+          <option value="横浜">横浜</option>
+        </select>
+
+        <label>food</label>
+        <select
+          value={state.selectedFood}
+          onChange={(e) => {
+            const input = e.target.value;
+            // TODO: error catch するコンポーネント欲しいな
+            if (!isFood(input)) throw new Error("unexpected value");
+            dispatch(actionCreators.selectFoodAction(input));
+          }}
+        >
+          <option value="カレー">カレー</option>
+          <option value="ラーメン">ラーメン</option>
         </select>
       </form>
-      {JSON.stringify(reducer)}
+      {JSON.stringify(state)}
     </div>
   );
 };
