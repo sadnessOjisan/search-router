@@ -9,14 +9,22 @@ import {
 
 import { isValidAreaFormInput, isValidFoodFormInput } from "../helper/util";
 import { data } from "../helper/data";
+import { Card } from "../component/card";
 
-const Component = () => {
+interface PassedProps {}
+
+interface Props extends PassedProps {
+  className?: string;
+}
+
+const Component: React.FC<Props> = (props) => {
   const [state, dispatch] = React.useReducer(searchReducer, initialState);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
+
   return (
-    <div>
+    <div className={props.className}>
       <form onSubmit={handleSubmit}>
         <label>area</label>
         <select
@@ -51,7 +59,7 @@ const Component = () => {
           <option value="ラーメン">ラーメン</option>
         </select>
       </form>
-      <div>
+      <div className="cards">
         {data
           .filter(
             (d) =>
@@ -63,17 +71,22 @@ const Component = () => {
                 : d.food === state.selectedFood)
           )
           .map((d) => (
-            <div>
-              {d.area}
-              {d.food}
-            </div>
+            <Card data={d}></Card>
           ))}
       </div>
-      {JSON.stringify(state)}
     </div>
   );
 };
 
-const StyledComponent = styled(Component)``;
+const StyledComponent = styled(Component)`
+  & .cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    & > div {
+      margin: 12px;
+    }
+  }
+`;
 
 export const UsingReducer = StyledComponent;
