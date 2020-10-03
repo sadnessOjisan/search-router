@@ -1,4 +1,4 @@
-import { AreaType, FoodType } from "../type";
+import { AreaFormValidType, FoodFormValidType } from "../type";
 
 const SELECT_AREA = "SELECT_AREA";
 const SELECT_FOOD = "SELECT_FOOD";
@@ -9,8 +9,8 @@ export const actionTypes = {
 } as const;
 
 export type StoreType = {
-  selectedArea: AreaType;
-  selectedFood: FoodType;
+  selectedArea: AreaFormValidType;
+  selectedFood: FoodFormValidType;
 };
 
 export const initialState: StoreType = {
@@ -18,14 +18,14 @@ export const initialState: StoreType = {
   selectedFood: "カレー",
 };
 
-const selectAreaAction = (area: AreaType) => {
+const selectAreaAction = (area: AreaFormValidType) => {
   return {
     type: actionTypes.SELECT_AREA,
     payload: area,
   };
 };
 
-const selectFoodAction = (food: FoodType) => {
+const selectFoodAction = (food: FoodFormValidType) => {
   return {
     type: actionTypes.SELECT_FOOD,
     payload: food,

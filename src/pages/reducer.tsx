@@ -7,7 +7,7 @@ import {
   actionCreators,
 } from "../reducer/searchReducer";
 
-import { isArea, isFood } from "../helper/util";
+import { isValidAreaFormInput, isValidFoodFormInput } from "../helper/util";
 
 const Component = () => {
   const [state, dispatch] = React.useReducer(searchReducer, initialState);
@@ -23,10 +23,12 @@ const Component = () => {
           onChange={(e) => {
             const input = e.target.value;
             // TODO: error catch するコンポーネント欲しいな
-            if (!isArea(input)) throw new Error("unexpected value");
+            if (!isValidAreaFormInput(input))
+              throw new Error("unexpected value");
             dispatch(actionCreators.selectAreaAction(input));
           }}
         >
+          <option value="ALL">全て</option>
           <option value="東京">東京</option>
           <option value="千葉">千葉</option>
           <option value="横浜">横浜</option>
@@ -38,10 +40,12 @@ const Component = () => {
           onChange={(e) => {
             const input = e.target.value;
             // TODO: error catch するコンポーネント欲しいな
-            if (!isFood(input)) throw new Error("unexpected value");
+            if (!isValidFoodFormInput(input))
+              throw new Error("unexpected value");
             dispatch(actionCreators.selectFoodAction(input));
           }}
         >
+          <option value="ALL">全て</option>
           <option value="カレー">カレー</option>
           <option value="ラーメン">ラーメン</option>
         </select>
