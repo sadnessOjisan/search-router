@@ -3,6 +3,7 @@ import {
   FoodType,
   AreaFormValidType,
   FoodFormValidType,
+  DataItemType,
 } from "../type";
 
 const areas: AreaType[] = ["東京", "千葉", "横浜"];
@@ -28,4 +29,17 @@ export const isValidFoodFormInput = (
   area: string
 ): area is FoodFormValidType => {
   return formValidFoods.includes(area as any);
+};
+
+export const isValidDataItem = (data: any): data is DataItemType => {
+  if (!(data.name && typeof data.name === "string")) {
+    return false;
+  }
+  if (!(data.area && isArea(data.area))) {
+    return false;
+  }
+  if (!(data.food && isFood(data.food))) {
+    return false;
+  }
+  return true;
 };

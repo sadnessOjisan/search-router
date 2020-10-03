@@ -75,7 +75,7 @@ const Component: React.FC<Props> = (props) => {
             <Link
               to={{
                 pathname: `/reducer-cards/${i}`,
-                state: { data: d },
+                state: d,
               }}
               key={i}
             >
