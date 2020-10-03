@@ -17,7 +17,7 @@ const Component: React.FC<Props> = (props) => {
     <div className={props.className}>
       <div className="title">{routerState.name}</div>
       <div className="infoRow">
-        {routerState.area}/<div>{routerState.food}</div>
+        {routerState.area}/{routerState.food}
       </div>
       <Link to="/reducer-cards">戻る</Link>
     </div>
